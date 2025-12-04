@@ -26,9 +26,14 @@ button{
 background-color: gold;
 
 }
-
 button:hover{
 background-color: lightgreen;
 
+}
+
+img{
+font-size: 50px;
+text-align: left;
+margin-right: 700px;
 
 }
