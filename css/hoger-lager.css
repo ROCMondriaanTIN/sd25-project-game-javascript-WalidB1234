@@ -30,21 +30,6 @@ img {
     border: 8px solid red;
 }
 
-#dobbelsteen4 {
-    background-color: rgb(255, 255, 255);
-    width: 150px;
-    height: 150px;
-    margin-top: 100px;
-    outline: 4px solid #0000ff30;
-}
-
-#dobbelsteen3 {
-    background-color: rgb(255, 255, 255);
-    width: 150px;
-    height: 150px;
-    outline: 4px solid #0000ff30;
-    margin-top: 100px;
-}
 
 #dobbelsteen2 {
     background-color: rgb(255, 255, 255);
@@ -83,34 +68,45 @@ hr {
 #Button1 {
     background-color: azure;
     font-size: 20px;
-    margin-top: 30px;
     border: 3px solid black;
 }
 
-.Img2 {
-    width: 200px;
-    height: 200px;
-    margin-top: -200px;
-
+#Img2 {
+    position: fixed;
+    bottom: 50vh;
+    left: 0;
 }
 
-.Img3 img {
-    width: 200px;
-    margin-top: 20px;
-    display: block;
-    margin-left: -750px;
-}
-.Img3 {
-justify-content: left;
-margin-top: -1000px;
-
+#Img3 {
+    position: fixed;
+    bottom: 50vh;
+    right: 0;
 
 }
 
 #buttonContainer{
+    position: fixed;
+    bottom: 30vh;
     display: flex;
-    flex-direction: row;
-    width: 10vw;
-    justify-content: space-around;
-    margin-bottom: 150vw;
+    flex-direction: row !important;
+    width: 99vw;
+    gap: 10px;
+    right: 0;
+}
+
+button{
+    padding: 20px 30px;
+    border: 2px solid #ff000050;
+    border-radius: 20px;
+    font-weight: bold;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+button:hover{
+    transform: scale(1.1);
+}
+
+#score{
+    font-size: 2rem;
 }
