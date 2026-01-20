@@ -7,31 +7,33 @@
     <title>Document</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="/css/hoger-lager.css">
+    <script type="text/javascript" src="/js/game.js" defer></script>
+    <script type="text/javascript" src="/js/start.js" defer></script>
+    <script type="text/javascript" src="/js/view.js" defer></script>
 </head>
 
 <body>
-    <p id="score">0</p>
     <div>
 
         <div class="main-dobbelsteen">
             <div id="dobbelsteen1">-</div>
             <div id="dobbelsteen2">?</div>
         </div>
+        <div class="message">Hoger Lager!</div>
         <div id="Img2">
-
-            <img style="position: fixed; right: -450px;" src="download-removebg-preview (3).png" class="Img2"
-                alt="preview">
-
-            <div class="Img3">
-                <img src="download-removebg-preview (3).png" alt="">
-            </div>
-
             <div id="buttonContainer">
                 <button type="button" id="button1">Hoger</button>
                 <button type="button" id="button2">Lager</button>
             </div>
 
-            <script src="/js/game.js" defer></script>
+            <p id="saldoText"></p>
+
+            <p id="inzetValue"></p>
+            <button onclick="inzet()">Inzet</button>
+            <input type="text" id="inzet" name="inzet" placeholder="Inzet: ">
+        </div>
+    </div>
+    </div>
 </body>
 
 </html>
