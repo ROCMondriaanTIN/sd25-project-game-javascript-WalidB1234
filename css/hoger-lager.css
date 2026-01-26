@@ -21,7 +21,7 @@ div {
     flex-direction: column;
 }
 
-#dobbelsteen1,
+
 #dobbelsteen2 {
     width: 150px;
     height: 150px;
@@ -31,6 +31,17 @@ div {
     justify-content: center;
     align-items: center;
     font-size: 48px;
+}
+#dobbelsteen1{
+     width: 150px;
+     height: 150px;
+    background-color: white;
+    outline: 4px solid #0000ff30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+  
 }
 
 .main-dobbelsteen {
@@ -67,7 +78,7 @@ button {
 }
 
 button:hover {
-    transform: scale(1.1);
+color: green;
 }
 
 .message {
@@ -93,7 +104,7 @@ button:hover {
     font-size: 1.2rem;
 }
 
-input[type="text"] {
+input {
     padding: 10px;
     font-size: 16px;
     border: 2px solid #0000ff30;

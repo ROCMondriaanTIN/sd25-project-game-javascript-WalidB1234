@@ -3,4 +3,4 @@ function showMessage(mes) {
 }
 function updateSaldoDisplay() {
     saldoText.innerHTML = saldo;
-}
+}   
