@@ -1,121 +1,96 @@
-let nummer = Math.floor(Math.random() * 6) + 1 // nummer tot 6
-let oudeNummer = Math.floor(Math.random() * 6) + 1;
-let score = 0;
-let inzetWaarde = 0;
-let scoreElement = document.querySelector('#score')
 
-const hogerBtn = document.querySelector('#button1');
-const lagerBtn = document.querySelector('#button2');
-const nummerDisplay = document.querySelector('#dobbelsteen1')
-const nummerDisplay2 = document.querySelector('#dobbelsteen2')
 
-hogerBtn.addEventListener('click', function () {
-    if (inzetWaarde === 0) {
+const MAX_SCORE = 100;
+let nummer = 0,
+    oudeNummer = 0,
+    score = 0,
+    inzetWaarde = 0,
+    saldo = 100;
+const roll = () => Math.floor(Math.random() * 6) + 1;
+
+const startGame = () => {
+    nummer = roll();
+    oudeNummer = roll();
+};
+
+const play = (isHoger) => {
+    if (saldo <= 0) {
+        alert("Game Over! Start een nieuw spel.");
+        return;
+    }
+
+    if (score >= MAX_SCORE) {
+        showMessage('Je hebt gewonnen! Max score bereikt!');
+        setTimeout(() => {
+            resetGame();
+        }, 2000);
+        return;
+    }
+
+    if (!inzetWaarde) {
         alert("Zet eerst een bedrag in!");
         return;
     }
-    if (nummer > oudeNummer) {
-        showMessage('Goed')
-        score++
-        saldo = saldo + inzetWaarde;
-        updateSaldoDisplay();
-    }
-    else if (nummer < oudeNummer) {
-        showMessage('Fout');
-        score--;
-        saldo = saldo - inzetWaarde;
-        updateSaldoDisplay();
-    }
-    else showMessage('zelfde number')
-    inzetWaarde = 0;
-    document.getElementById("inzet").value = "";
-    document.getElementById("inzetValue").innerText = "";
-    revealNumber()
-})
 
-lagerBtn.addEventListener('click', function () {
-    if (inzetWaarde === 0) {
-        alert("Zet eerst een bedrag in!");
-        return;
-    }
-    if (nummer < oudeNummer) {
+    const win = isHoger ? nummer > oudeNummer : nummer < oudeNummer;
+
+    if (nummer === oudeNummer) {
+        showMessage('zelfde number');
+    } else if (win) {
         showMessage('Goed');
-        score++
-        saldo = saldo + inzetWaarde;
-        updateSaldoDisplay();
-    }
-    else if (nummer > oudeNummer) {
+        score++;
+        saldo += inzetWaarde;
+        if (saldo > 100) saldo = 100;
+    } else {
         showMessage('Fout');
-        score--;
-        saldo = saldo - inzetWaarde;
-        updateSaldoDisplay();
+        if (score > 0) score--;
+        saldo -= inzetWaarde;
     }
-    else showMessage('zelfde number')
+
+    updateSaldoDisplay();
     inzetWaarde = 0;
-    document.getElementById("inzet").value = "";
-    document.getElementById("inzetValue").innerText = "";
-    revealNumber()
-})
+    inzetInput.value = "";
+    inzetDisplay.innerText = "";
 
-function start() {
-    nummer = Math.floor(Math.random() * 6) + 1;
-    nummerDisplay.innerHTML = nummer;
-    nummerDisplay2.innerHTML = '?';
-    setupInzet();
-}
-
-function generateNew() {
-    if (scoreElement) {
-        scoreElement.innerHTML = score;
+    if (saldo <= 0) {
+        showMessage('Game Over! Geen saldo meer.');
+        setTimeout(() => {
+            resetGame();
+        }, 2000);
+        return;
     }
-    oudeNummer = nummer;
-    nummer = Math.floor(Math.random() * 6) + 1;
-    nummerDisplay.innerHTML = oudeNummer;
-}
 
-function revealNumber() {
-    nummerDisplay2.textContent = nummer;
-    setTimeout(function () {
-        nummerDisplay2.textContent = '?';
-        generateNew();
-    }, 2000)
-}
+    setTimeout(() => {
+        oudeNummer = nummer;
+        nummer = roll();
+        nummerDisplay.innerHTML = oudeNummer;
+        nummerDisplay2.innerHTML = '?';
+        if (scoreElement) scoreElement.innerHTML = score;
+    }, 1500);
+};
 
-//start()
-
-
-let saldo = 100;
-const saldoText = document.getElementById('saldoText');
-saldoText.innerHTML = saldo;
-
-function updateSaldoDisplay() {
-    saldoText.innerHTML = saldo;
-}
-
-function setupInzet() {
-    const saldoElement = document.getElementById("inzetValue");
-    const inputElement = document.getElementById("inzet");
-
-    inputElement.addEventListener("keyup", () => {
-        saldoElement.innerText = `Inzet: ${inputElement.value}`;
-    });
-}
-
-function inzet() {
-    const inputElement = document.getElementById("inzet");
-
-    let betAmount = parseInt(inputElement.value);
-
-    if (!betAmount || betAmount <= 0) {
+const inzet = () => {
+    const betAmount = parseInt(inzetInput.value);
+    if (betAmount <= 0 || isNaN(betAmount)) {
         alert("Voer een geldig bedrag in");
         return;
     }
-
     if (saldo < betAmount) {
-        alert("Niet genoeg saldo")
-        return
+        alert("Niet genoeg saldo");
+        return;
     }
-
     inzetWaarde = betAmount;
-    console.log("Inzet value:", betAmount);
-}
+};
+
+const resetGame = () => {
+    score = 0;
+    saldo = 100;
+    inzetWaarde = 0;
+    inzetInput.value = "";
+    inzetDisplay.innerText = "";
+    if (scoreElement) scoreElement.innerHTML = score;
+    if (saldoText) saldoText.innerHTML = saldo;
+    startGame();
+    nummerDisplay.innerHTML = nummer;
+    nummerDisplay2.innerHTML = '?';
+};

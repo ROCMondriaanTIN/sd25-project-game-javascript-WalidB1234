@@ -1,4 +1,6 @@
 function showMessage(mes) {
-    let messageDiv=document.querySelector('.message');
-    messageDiv.innerHTML=mes;
+    document.querySelector('.message').innerHTML = mes;
+}
+function updateSaldoDisplay() {
+    saldoText.innerHTML = saldo;
 }
