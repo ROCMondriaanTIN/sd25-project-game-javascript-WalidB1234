@@ -9,6 +9,8 @@ const inzetDisplay = document.querySelector('#inzetValue');
 
 window.onload = () => {
     startGame();
+
+    
     nummerDisplay.innerHTML = nummer;
     nummerDisplay2.innerHTML = "?";
     saldoText.innerHTML = saldo;

@@ -3,7 +3,7 @@ let oudeNummer = 0;
 let score = 0;
 let inzetWaarde = 0;
 let saldo = 100;
-const roll = () => Math.floor(Math.random() * 6) + 1;
+const roll = () => Math.floor(Math.random() * 6);
 
 const startGame = () => {
     nummer = roll();
@@ -17,15 +17,13 @@ const play = (isHoger) => {
         return;
     }
 
-    // controleer of de speler heeft ingezet
+    //kijkt of de speler heeft ingezet
     if (!inzetWaarde) {
         showMessage("Zet eerst in");
         return;
     }
     // bepaalt of de speler heeft gewonnen
-    const gewonnen = isHoger
-    nummer > oudeNummer;
-    nummer < oudeNummer;
+    const gewonnen = isHoger ? nummer > oudeNummer : nummer < oudeNummer;
 
     // controleert de uitslag
     if (nummer == oudeNummer) {
@@ -63,3 +61,4 @@ const inzet = () => {
     }
     inzetWaarde = bedrag;
 };
+
